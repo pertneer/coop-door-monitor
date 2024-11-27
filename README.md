@@ -8,3 +8,10 @@ The project uses the following libraries:
 1. UniversalTelegramBot
 2. WiFiManager
 3. Arduino Json
+
+
+Rename sample_secrets.h to secrets.h and enter in your Telegram details. To get the Telegram details follow this tutorial from Telegram.
+https://core.telegram.org/bots/tutorial
+or
+https://randomnerdtutorials.com/telegram-esp32-motion-detection-arduino/
+
