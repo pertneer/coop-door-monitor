@@ -28,18 +28,18 @@ UniversalTelegramBot bot(BOTtoken, client);
 
 
 void setup() {
+    WiFi.hostname(hostname);
     WiFi.mode(WIFI_STA);
-
     Serial.begin(115200);
     delay(10); // give a little time for serial to start
     Serial.println("\n Starting");
     
     WiFiManager wm;
     // Remove any previous network settings
-    wm.resetSettings();
+    //wm.resetSettings();
 
     if(wm.autoConnect("AutoConnectAP")){
-        WiFi.hostname(hostname);
+        
         client.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
         delay(500); // needed to allow WiFi time to start
         bot.sendMessage(CHAT_ID, "Coop Door Monitor started up", "");
