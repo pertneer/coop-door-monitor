@@ -36,9 +36,9 @@ void setup() {
     
     WiFiManager wm;
     // Remove any previous network settings
-    //wfm.resetSettings();
+    wm.resetSettings();
 
-    if(!wm.autoConnect("AutoConnectAP")){
+    if(wm.autoConnect("AutoConnectAP")){
         WiFi.hostname(hostname);
         client.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
         delay(500); // needed to allow WiFi time to start
@@ -67,12 +67,13 @@ void setup() {
     }
 }
 
+
+
 void loop() {
-    // if WiFi is connect lets log some stuff to serial and send a message to Telegraph bot
+    // if WiFi is connected lets log some information to serial and send a message to Telegraph
     if (WiFi.status() == WL_CONNECTED && !isConnected) {
         Serial.println("WiFi connected");
         Serial.print("IP address: ");
-        //TODO test neopixel with onboard LED to change color.
         digitalWrite(LED_BUILTIN, HIGH); // turn on onboard LED to indicate it is connected. 
         Serial.println(WiFi.localIP()),
         Serial.print("RRSI: ");
@@ -96,7 +97,7 @@ void loop() {
     }
 
     // door switch monitoring
-    last_door_state = door_state;              // save the last state
+    last_door_state = door_state; // save the last state
     door_state  = digitalRead(DOOR_SENSOR_PIN); // read new state
 
     if (last_door_state == LOW && door_state == HIGH) { // state change: LOW -> HIGH
@@ -104,6 +105,7 @@ void loop() {
         digitalWrite(doorLedGPin, LOW);
         digitalWrite(doorLedRPin, HIGH);
         // TODO: turn on alarm, light or send notification ...
+        bot.sendMessage(CHAT_ID,doorOpenMessage);
     }
     else
     if (last_door_state == HIGH && door_state == LOW) { // state change: HIGH -> LOW
