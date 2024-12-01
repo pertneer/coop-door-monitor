@@ -9,7 +9,7 @@ The project uses the following libraries:
 2. WiFiManager
 3. Arduino Json
 
-![alt text](src/coop-door-monitor.png "Wiring")
+![alt text](src/coop-door-monitor_bb.svg "Wiring")
 
 Rename sample_secrets.h to secrets.h and enter in your Telegram details. To get the Telegram details follow this tutorial from Telegram.
 https://core.telegram.org/bots/tutorial
